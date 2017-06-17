@@ -81,12 +81,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         mAdapter = new PlaceListAdapter(this, null);;
         mRecyclerView.setAdapter(mAdapter);
-        // TODO (9) Create a boolean SharedPreference to store the state of the "Enable Geofences" switch
+        //  Create a boolean SharedPreference to store the state of the "Enable Geofences" switch
         // and initialize the switch based on the value of that SharedPreference
         Switch onOffSwitch = (Switch) findViewById(R.id.enable_switch);
         mIsEnabled = getPreferences(MODE_PRIVATE).getBoolean(getString(R.string.setting_enabled), false);
         onOffSwitch.setChecked(mIsEnabled);
-        // TODO (10) Handle the switch's change event and Register/Unregister geofences based on the value of isChecked
+        //  Handle the switch's change event and Register/Unregister geofences based on the value of isChecked
         // as well as set a private boolean mIsEnabled to the current switch's state
         onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, this)
                 .build();
-        // TODO (8) Create a new instance of Geofencing using "this" as the context and mClient as the client
+        //  Create a new instance of Geofencing using "this" as the context and mClient as the client
 
         mGeofencing = new Geofencing(this, client);
 
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             @Override
             public void onResult(@NonNull PlaceBuffer places) {
                 mAdapter.swapPlaces(places);
-                // TODO (11) Call updateGeofenceList and registerAllGeofences if mIsEnabled is true
+                //  Call updateGeofenceList and registerAllGeofences if mIsEnabled is true
                 mGeofencing.updateGeofencesList(places);
                 if (mIsEnabled) mGeofencing.registerAllGeofences();
 
@@ -184,7 +184,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             locationPermissions.setChecked(true);
             locationPermissions.setEnabled(false);
         }
+        //TODO (3) Initialize ringer permissions checkbox
     }
+    // TODO (2) Implement onRingerPermissionsClicked to launch ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS
 
     public void onLocationPermissionClicked(View view) {
         ActivityCompat.requestPermissions(MainActivity.this,

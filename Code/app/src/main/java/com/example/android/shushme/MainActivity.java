@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         // Set up the recycler view
         mRecyclerView = (RecyclerView) findViewById(R.id.places_list_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // TODO (3) Modify the Adapter to take a PlaceBuffer in the constructor
+
         mAdapter = new PlaceListAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -77,6 +79,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .build();
 
     }
+
+    // TODO (1) Implement a method called refreshPlacesData that:
+    // - Queries all the locally stored Places IDs
+    // - Calls Places.GeoDataApi.getPlaceById with that list of IDs
+    // Note: When calling Places.GeoDataApi.getPlaceById use the same GoogleApiClient created
+    // in MainActivity's onCreate (you will have to declare it as a private member)
+
+    //TODO (8) Set the getPlaceById callBack so that onResult calls the Adapter's swapPlaces with the result
+
+    //TODO (2) call refreshPlacesData in GoogleApiClient's onConnected and in the Add New Place button click event
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -123,8 +136,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             return;
         }
         Toast.makeText(this, getString(R.string.location_permissions_granted_message), Toast.LENGTH_LONG).show();
-        // TODO (1) Create a PlacePicker.IntentBuilder and call startActivityForResult
-        // TODO (2) Handle GooglePlayServices exceptions
         try {
             // Start a new Activity for the Place Picker API, this will trigger {@code #onActivityResult}
             // when a place is selected or with the user cancels.
@@ -140,8 +151,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
 
     }
-    // TODO (3) Implement onActivityResult and check that the requestCode is PLACE_PICKER_REQUEST
-    // TODO (4) In onActivityResult, use PlacePicker.getPlace to extract the Place ID and insert it into the DB
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK) {
             Place place = PlacePicker.getPlace(this, data);

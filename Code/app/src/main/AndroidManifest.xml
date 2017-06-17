@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- TODO (1) Add meta-data tag with API key -->
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -28,7 +28,7 @@
 
     </application>
 
-    <!-- TODO (2) Add uses-permission tags for INTERNET and ACCESS_FINE_LOCATION -->
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
